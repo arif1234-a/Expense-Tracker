@@ -1,19 +1,25 @@
 import { useState } from "react";
 
 function InputForm() {
-  const { expense, setExpense } = useState({});
-  const [ expenses, setExpenses ]= useState([]);
+ const [expense, setExpense] = useState({
+   name: "",
+   description: "",
+   category: "",
+   amount: "",
+   expenseDate: "",
+ });
+  const [expenses, setExpenses] = useState([]);
 
   const addExpense = (e) => {
-    e.preventDefault(),
-      (setExpense = {
-        name: `${document.getElementById("input1").value}`,
-        Description: `${document.getElementById("input2").value}`,
-        Category: `${document.getElementById("input3").value}`,
-        Amount: `${document.getElementById("input4").value}`,
-        Date: `${document.getElementById("input5").value}`,
-      }),
-      setExpenses = ([...expenses,expense]);
+      e.preventDefault(),
+        setExpenses([...expenses, expense]);
+      setExpense({
+        name: ``,
+        description: ``,
+        category: ``,
+        amount: ``,
+        expneseDate: ``,
+      })
   };
   return (
     <div className="border-[1px] shadow-2xl border-e-black">
@@ -22,42 +28,60 @@ function InputForm() {
         <p>Enter your expense details below</p>
         <input
           type="text"
-          name=""
+          name="name"
           id="input1"
           placeholder="Enter Expense name"
           className="m-2 p-0.5 border-[1px] border-black"
+          value={expense.name}
+          onChange={(e) => {
+            setExpense({ ...expense, name: e.target.value });
+          }}
         />
         <input
           type="text"
-          name=""
+          name="description"
           id="input2"
           placeholder="Enter Description"
           className="m-2 p-0.5 border-[1px] border-black"
+          value={expense.description}
+          onChange={(e) => {
+            setExpense({ ...expense, description: e.target.value });
+          }}
         />
         <input
           type="text"
-          name=""
+          name="category"
           id="input3"
           placeholder="Enter the Expense Category"
           className="m-2 p-0.5 border-[1px] border-black"
+          value={expense.category}
+          onChange={(e) => {
+            setExpense({ ...expense, category: e.target.value });
+          }}
         />
         <input
           type="text"
-          name=""
+          name="amount"
           id="input4"
           placeholder="Enter Amount"
           className="m-2 p-0.5 border-[1px] border-black"
+          value={expense.amount}
+          onChange={(e) => {
+            setExpense({ ...expense, amount: e.target.value });
+          }}
         />
         <input
           type="text"
-          name=""
+          name="expenseDate"
           id="input5"
           placeholder="Enter Date"
           className="m-2 p-0.5 border-[1px] border-black"
+          value={expense.expenseDate}
+          onChange={(e) => {
+            setExpense({ ...expense, expenseDate: e.target.value });
+          }}
         />
-        <button>
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
