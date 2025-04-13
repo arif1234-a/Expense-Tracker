@@ -1,6 +1,9 @@
 import React from "react";
 
-function Table({ expenses}) {
+function Table({ expenses, searchQuery }) {
+    const search = expenses.filter((expense) => {
+      expense.name.toLowerCase().includes(searchQuery.toLowerCase());
+    });
 
   return (
     <table className="border-gray-300 w-full rounded-[10px]">
@@ -14,7 +17,22 @@ function Table({ expenses}) {
         </tr>
       </thead>
       <tbody>
-        {expenses.map((expense, index) => (
+              {search.lenght>0?(search.map((expense,index) => ( <tr key={index} className="text-center">
+            <td className="border border-gray-300 px-4 py-2">{expense.name}</td>
+            <td className="border border-gray-300 px-4 py-2">
+              {expense.description}
+            </td>
+            <td className="border border-gray-300 px-4 py-2">
+              {expense.category}
+            </td>
+            <td className="border border-gray-300 px-4 py-2">
+              {expense.amount}
+            </td>
+            <td className="border border-gray-300 px-4 py-2">
+              {expense.expenseDate}
+            </td>
+          </tr>))): (
+                  expenses.map((expense, index) => (
           <tr key={index} className="text-center">
             <td className="border border-gray-300 px-4 py-2">{expense.name}</td>
             <td className="border border-gray-300 px-4 py-2">
@@ -30,7 +48,7 @@ function Table({ expenses}) {
               {expense.expenseDate}
             </td>
           </tr>
-        ))}
+        )))}
       </tbody>
     </table>
   );
